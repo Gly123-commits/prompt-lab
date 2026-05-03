@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Prompt Lab · AI提示词工坊</title>
+<title>Prompt Lab 路 AI鎻愮ず璇嶅伐鍧?/title>
 <style>
 :root{--bg:#0f0f13;--surface:#1a1a24;--surface2:#22222f;--border:#2a2a3a;--text:#e4e4ed;--text2:#9999aa;--accent:#7c6ff0;--accent2:#b896f0;--green:#4ade80;--orange:#fb923c;--red:#f87171;--r:10px}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -81,91 +81,105 @@ header{border-bottom:1px solid var(--border);padding:14px 20px;display:flex;alig
 </style>
 </head>
 <body>
+
 <header>
-<div class="logo">✦ Prompt Lab <span style="font-weight:400;-webkit-text-fill-color:var(--text2)">· AI 提示词工坊</span></div>
+<div class="logo">鉁?Prompt Lab <span style="font-weight:400;-webkit-text-fill-color:var(--text2)">路 AI 鎻愮ず璇嶅伐鍧?/span></div>
 <div class="header-actions">
-<span class="cnt" id="cnt">0 个</span>
-<button class="btn btn-sm" onclick="exportData()">📤</button>
-<button class="btn btn-sm" onclick="importData()">📥</button>
-<button class="btn btn-primary btn-sm" onclick="openNew()">✚ 新建</button>
+<span class="cnt" id="cnt">0 涓?/span>
+<button class="btn btn-sm" onclick="exportData()">馃摛</button>
+<button class="btn btn-sm" onclick="importData()">馃摜</button>
+<button class="btn btn-primary btn-sm" onclick="openNew()">鉁?鏂板缓</button>
 </div>
 </header>
+
 <div class="container">
 <div class="cat-bar" id="catBar"></div>
-<div class="sb"><input id="search" placeholder="🔍 搜索标题、内容、标签…" oninput="render()"></div>
+<div class="sb"><input id="search" placeholder="馃攳 鎼滅储鏍囬銆佸唴瀹广€佹爣绛锯€? oninput="render()"></div>
+
 <div class="editor-section" id="editor" style="display:none">
 <div class="card">
-<div class="editor-header"><strong id="editorTitle">新建提示词</strong><button class="btn btn-sm" onclick="closeEditor()">✕</button></div>
+<div class="editor-header"><strong id="editorTitle">鏂板缓鎻愮ず璇?/strong><button class="btn btn-sm" onclick="closeEditor()">鉁?/button></div>
 <div class="editor-body">
-<input id="pt" placeholder="标题（如：AI 扒谱助手）" maxlength="60">
+<input id="pt" placeholder="鏍囬锛堝锛欰I 鎵掕氨鍔╂墜锛? maxlength="60">
 <div class="cat-select" id="catSelect"></div>
 <div class="tags-area" id="tagsArea"></div>
-<div style="font-size:11px;color:var(--text2);margin:2px 0 6px;">💡 用 <code style="color:var(--accent2);background:var(--surface2);padding:1px 5px;border-radius:4px;">{变量名}</code> 做动态模板</div>
+<div style="font-size:11px;color:var(--text2);margin:2px 0 6px;">馃挕 鐢?<code style="color:var(--accent2);background:var(--surface2);padding:1px 5px;border-radius:4px;">{鍙橀噺鍚峿</code> 鍋氬姩鎬佹ā鏉?/div>
 <div class="var-bar" id="varBar"></div>
-<textarea id="pc" placeholder="输入提示词内容...&#10;&#10;示例：&#10;你是一位精通 {style} 的音乐制作人，分析歌曲 {song} 的 {aspect}。"></textarea>
+<textarea id="pc" placeholder="杈撳叆鎻愮ず璇嶅唴瀹?..&#10;&#10;绀轰緥锛?#10;浣犳槸涓€浣嶇簿閫?{style} 鐨勯煶涔愬埗浣滀汉锛屽垎鏋愭瓕鏇?{song} 鐨?{aspect}銆?></textarea>
 <div class="editor-actions">
-<button class="btn btn-primary" onclick="save()">💾 保存</button>
-<button class="btn" onclick="preview()">👁 预览</button>
-<button class="btn" onclick="addVar()">✚ 变量</button>
-<button class="btn" onclick="clearEditor()">清空</button>
+<button class="btn btn-primary" onclick="save()">馃捑 淇濆瓨</button>
+<button class="btn" onclick="preview()">馃憗 棰勮</button>
+<button class="btn" onclick="addVar()">鉁?鍙橀噺</button>
+<button class="btn" onclick="clearEditor()">娓呯┖</button>
 </div></div></div></div>
+
 <div class="grid" id="grid"></div>
-<div class="empty" id="empty"><div class="icon">✦</div><h3>还没有提示词</h3><p>点击「新建」开始创建</p></div>
+<div class="empty" id="empty"><div class="icon">鉁?/div><h3>杩樻病鏈夋彁绀鸿瘝</h3><p>鐐瑰嚮銆屾柊寤恒€嶅紑濮嬪垱寤?/p></div>
 </div>
+
 <div class="modal-overlay" id="modal">
 <div class="modal">
-<h2 id="modalTitle">提示词</h2>
+<h2 id="modalTitle">鎻愮ず璇?/h2>
 <div id="modalMeta" style="font-size:12px;color:var(--text2);margin-bottom:10px"></div>
 <textarea id="modalContent" readonly></textarea>
 <div class="modal-actions">
-<button class="btn btn-sm" id="copyBtn" onclick="copyModal()">📋 复制</button>
-<button class="btn btn-sm" onclick="editModal()">✏ 编辑</button>
-<button class="btn btn-sm" onclick="closeModal()">关闭</button>
+<button class="btn btn-sm" id="copyBtn" onclick="copyModal()">馃搵 澶嶅埗</button>
+<button class="btn btn-sm" onclick="editModal()">鉁?缂栬緫</button>
+<button class="btn btn-sm" onclick="closeModal()">鍏抽棴</button>
 </div></div></div>
+
 <div class="toasts" id="toasts"></div>
+
 <script>
-let P=[],C=['通用'],cur='全部',eid=null,ets=[],ecat='通用';
-function L(){try{const d=JSON.parse(localStorage.getItem('pl'));if(d){P=d.p||[];C=d.c||['通用']}}catch(e){}}
+let P=[],C=['閫氱敤'],cur='鍏ㄩ儴',eid=null,ets=[],ecat='閫氱敤';
+
+function L(){try{const d=JSON.parse(localStorage.getItem('pl'));if(d){P=d.p||[];C=d.c||['閫氱敤']}}catch(e){}}
 function S(){localStorage.setItem('pl',JSON.stringify({p:P,c:C}))}
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
 function renderCat(){
 const b=document.getElementById('catBar');
-let h=`<button class="cat-tag ${cur==='全部'?'active':''}" onclick="setC('全部')">全部 (${P.length})</button>`;
+let h=`<button class="cat-tag ${cur==='鍏ㄩ儴'?'active':''}" onclick="setC('鍏ㄩ儴')">鍏ㄩ儴 (${P.length})</button>`;
 C.forEach(c=>{const n=P.filter(p=>p.cat===c).length;h+=`<button class="cat-tag ${cur===c?'active':''}" onclick="setC('${c}')">${c} (${n})</button>`});
-h+=`<button class="cat-tag add-cat" onclick="addC()">✚</button>`;
+h+=`<button class="cat-tag add-cat" onclick="addC()">鉁?/button>`;
 b.innerHTML=h;
 }
 function setC(c){cur=c;renderCat();render()}
+
 function addC(){
-const n=prompt('新分类名：');
-if(n&&n.trim()&&!C.includes(n.trim())){C.push(n.trim());S();renderCat();updCatSel();toast(`已建「${n.trim()}」`)}
+const n=prompt('鏂板垎绫诲悕锛?);
+if(n&&n.trim()&&!C.includes(n.trim())){C.push(n.trim());S();renderCat();updCatSel();toast(`宸插缓銆?{n.trim()}銆峘)}
 }
+
 function updCatSel(){
 const el=document.getElementById('catSelect');
-const sc=eid?P.find(p=>p.id===eid)?.cat||'通用':ecat;
+const sc=eid?P.find(p=>p.id===eid)?.cat||'閫氱敤':ecat;
 el.innerHTML=C.map(c=>`<span class="cat-opt ${c===sc?'active':''}" onclick="selC('${c}')">${c}</span>`).join('');
 }
 function selC(c){ecat=c;document.querySelectorAll('.cat-opt').forEach(el=>el.classList.toggle('active',el.textContent===c))}
+
 function renderTags(){
 const a=document.getElementById('tagsArea');
-let h=ets.map(t=>`<span class="tag">${t}<span class="rm" onclick="rmTag('${t}')">×</span></span>`).join('');
-h+=`<input class="tag-input" id="ti" placeholder="+标签" onkeydown="tgKey(event)">`;
+let h=ets.map(t=>`<span class="tag">${t}<span class="rm" onclick="rmTag('${t}')">脳</span></span>`).join('');
+h+=`<input class="tag-input" id="ti" placeholder="+鏍囩" onkeydown="tgKey(event)">`;
 a.innerHTML=h;
 }
 function tgKey(e){
 if(e.key==='Enter'){const v=e.target.value.trim();if(v&&!ets.includes(v)){ets.push(v);renderTags();updVar()}e.target.value=''}
 }
 function rmTag(t){ets=ets.filter(x=>x!==t);renderTags();updVar()}
+
 function updVar(){
 const c=document.getElementById('pc').value;
 const s=new Set();let m;const re=/\{(\w+)\}/g;while((m=re.exec(c)))s.add(m[1]);
-document.getElementById('varBar').innerHTML=s.size===0?'<span style="font-size:11px;color:var(--text2)">未检测到变量</span>':Array.from(s).map(v=>`<span class="var-btn" onclick="cpv('{${v}}')">{${v}}</span>`).join('');
+document.getElementById('varBar').innerHTML=s.size===0?'<span style="font-size:11px;color:var(--text2)">鏈娴嬪埌鍙橀噺</span>':Array.from(s).map(v=>`<span class="var-btn" onclick="cpv('{${v}}')">{${v}}</span>`).join('');
 }
-function addVar(){const n=prompt('变量名：');if(n&&n.trim()){document.getElementById('pc').value+=`{n.trim()}}`;updVar()}}
-function cpv(v){navigator.clipboard.writeText(v).then(()=>toast(`已复制 ${v}`))}
+function addVar(){const n=prompt('鍙橀噺鍚嶏細');if(n&&n.trim()){document.getElementById('pc').value+=`{${n.trim()}}`;updVar()}}
+function cpv(v){navigator.clipboard.writeText(v).then(()=>toast(`宸插鍒?${v}`))}
+
 function openNew(){
-eid=null;ets=[];ecat='通用';
-document.getElementById('editorTitle').textContent='✦ 新建提示词';
+eid=null;ets=[];ecat='閫氱敤';
+document.getElementById('editorTitle').textContent='鉁?鏂板缓鎻愮ず璇?;
 document.getElementById('pt').value='';
 document.getElementById('pc').value='';
 document.getElementById('editor').style.display='block';
@@ -173,10 +187,11 @@ updCatSel();renderTags();updVar();
 document.getElementById('pt').focus();
 window.scrollTo({top:0,behavior:'smooth'});
 }
+
 function editP(id){
 const p=P.find(x=>x.id===id);if(!p)return;
 eid=id;ets=[...(p.tags||[])];ecat=p.cat;
-document.getElementById('editorTitle').textContent=`✏ ${p.title}`;
+document.getElementById('editorTitle').textContent=`鉁?${p.title}`;
 document.getElementById('pt').value=p.title;
 document.getElementById('pc').value=p.content;
 document.getElementById('editor').style.display='block';
@@ -184,49 +199,53 @@ updCatSel();renderTags();updVar();
 window.scrollTo({top:0,behavior:'smooth'});
 }
 function closeEditor(){document.getElementById('editor').style.display='none';eid=null}
+
 function save(){
 const t=document.getElementById('pt').value.trim(),c=document.getElementById('pc').value.trim();
-if(!t)return toast('请输入标题','err');
-if(!c)return toast('请输入内容','err');
+if(!t)return toast('璇疯緭鍏ユ爣棰?,'err');
+if(!c)return toast('璇疯緭鍏ュ唴瀹?,'err');
 const vs=new Set();let m;const re=/\{(\w+)\}/g;while((m=re.exec(c)))vs.add(m[1]);
-if(eid){const i=P.findIndex(p=>p.id===eid);if(i>-1)P[i]={...P[i],title:t,content:c,cat:ecat||'通用',tags:[...ets],vars:Array.from(vs),updatedAt:Date.now()};toast('已更新')}
-else{P.unshift({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),title:t,content:c,cat:ecat||'通用',tags:[...ets],vars:Array.from(vs),createdAt:Date.now(),updatedAt:Date.now(),use:0});toast('已保存')}
+if(eid){const i=P.findIndex(p=>p.id===eid);if(i>-1)P[i]={...P[i],title:t,content:c,cat:ecat||'閫氱敤',tags:[...ets],vars:Array.from(vs),updatedAt:Date.now()};toast('宸叉洿鏂?)}
+else{P.unshift({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),title:t,content:c,cat:ecat||'閫氱敤',tags:[...ets],vars:Array.from(vs),createdAt:Date.now(),updatedAt:Date.now(),use:0});toast('宸蹭繚瀛?)}
 S();closeEditor();renderCat();render();updCnt()
 }
-function delP(id){const p=P.find(x=>x.id===id);if(!p||!confirm(`删「${p.title}」？`))return;P=P.filter(x=>x.id!==id);S();renderCat();render();updCnt();toast('已删')}
-function dupP(id){const p=P.find(x=>x.id===id);if(!p)return;P.unshift({...p,id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),title:p.title+' (副本)',createdAt:Date.now(),updatedAt:Date.now(),use:0});S();renderCat();render();updCnt();toast('已复制')}
+
+function delP(id){const p=P.find(x=>x.id===id);if(!p||!confirm(`鍒犮€?{p.title}銆嶏紵`))return;P=P.filter(x=>x.id!==id);S();renderCat();render();updCnt();toast('宸插垹')}
+function dupP(id){const p=P.find(x=>x.id===id);if(!p)return;P.unshift({...p,id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),title:p.title+' (鍓湰)',createdAt:Date.now(),updatedAt:Date.now(),use:0});S();renderCat();render();updCnt();toast('宸插鍒?)}
+
 function render(){
 const g=document.getElementById('grid'),e=document.getElementById('empty');
 const q=document.getElementById('search').value.toLowerCase().trim();
-let f=P;if(cur!=='全部')f=f.filter(p=>p.cat===cur);
+let f=P;if(cur!=='鍏ㄩ儴')f=f.filter(p=>p.cat===cur);
 if(q)f=f.filter(p=>p.title.toLowerCase().includes(q)||p.content.toLowerCase().includes(q)||(p.tags||[]).some(t=>t.toLowerCase().includes(q)));
 if(!f.length){g.innerHTML='';e.style.display='block';return}
 e.style.display='none';
 g.innerHTML=f.map(p=>{
-const prev=p.content.length>130?p.content.slice(0,130)+'…':p.content;
+const prev=p.content.length>130?p.content.slice(0,130)+'鈥?:p.content;
 const ts=(p.tags||[]).map(t=>`<span>${t}</span>`).join('');
 const tm=new Date(p.updatedAt||p.createdAt).toLocaleDateString('zh-CN');
 const vs=p.vars?.length?`<span style="color:var(--orange);font-size:10px;">${p.vars.map(v=>'{'+v+'}').join(' ')}</span>`:'';
 return `<div class="card-p" onclick="view('${p.id}')">
 <div class="ca" onclick="event.stopPropagation()">
-<button class="btn btn-sm" onclick="editP('${p.id}')">✏</button>
-<button class="btn btn-sm" onclick="dupP('${p.id}')">📋</button>
-<button class="btn btn-sm btn-danger" onclick="delP('${p.id}')">🗑</button>
+<button class="btn btn-sm" onclick="editP('${p.id}')">鉁?/button>
+<button class="btn btn-sm" onclick="dupP('${p.id}')">馃搵</button>
+<button class="btn btn-sm btn-danger" onclick="delP('${p.id}')">馃棏</button>
 </div>
 <div class="title">${esc(p.title)}<span class="badge">${p.cat}</span></div>
 <div class="preview">${esc(prev)}</div>
 <div class="meta"><div class="ts">${ts}</div><div style="display:flex;gap:6px;align-items:center">${vs}<span>${tm}</span></div></div>
 </div>`}).join('');
 }
-function updCnt(){document.getElementById('cnt').textContent=`${P.length} 个`}
+function updCnt(){document.getElementById('cnt').textContent=`${P.length} 涓猔}
+
 let _vid=null;
 function view(id){
 const p=P.find(x=>x.id===id);if(!p)return;
 p.use=(p.use||0)+1;S();
 document.getElementById('modalTitle').textContent=p.title;
 let m=`<span style="background:rgba(124,111,240,.15);color:var(--accent2);padding:1px 8px;border-radius:8px;font-size:11px">${p.cat}</span>`;
-m+=` <span style="margin-left:6px;font-size:11px">🗓 ${new Date(p.updatedAt||p.createdAt).toLocaleString('zh-CN')}</span>`;
-if(p.use)m+=` <span style="margin-left:6px;font-size:11px">👁 ${p.use}次</span>`;
+m+=` <span style="margin-left:6px;font-size:11px">馃棑 ${new Date(p.updatedAt||p.createdAt).toLocaleString('zh-CN')}</span>`;
+if(p.use)m+=` <span style="margin-left:6px;font-size:11px">馃憗 ${p.use}娆?/span>`;
 if(p.tags?.length)m+=`<div style="margin-top:4px">${p.tags.map(t=>`<span style="display:inline-block;padding:1px 6px;border-radius:6px;background:var(--surface2);font-size:10px;margin:1px">${t}</span>`).join('')}</div>`;
 document.getElementById('modalMeta').innerHTML=m;
 document.getElementById('modalContent').value=p.content;
@@ -236,21 +255,27 @@ _vid=id;
 }
 function closeModal(){document.getElementById('modal').classList.remove('show')}
 function editModal(){const id=_vid;closeModal();if(id)editP(id)}
-function copyModal(){const ta=document.getElementById('modalContent');navigator.clipboard.writeText(ta.value).then(()=>{toast('已复制');document.getElementById('copyBtn').textContent='✅ 已复制';setTimeout(()=>document.getElementById('copyBtn').textContent='📋 复制',2000)})}
+function copyModal(){const ta=document.getElementById('modalContent');navigator.clipboard.writeText(ta.value).then(()=>{toast('宸插鍒?);document.getElementById('copyBtn').textContent='鉁?宸插鍒?;setTimeout(()=>document.getElementById('copyBtn').textContent='馃搵 澶嶅埗',2000)})}
+
 function preview(){
 let c=document.getElementById('pc').value;const s=new Set();let m;const re=/\{(\w+)\}/g;while((m=re.exec(c)))s.add(m[1]);
-if(!s.size){document.getElementById('modalContent').value=c;document.getElementById('modalTitle').textContent='👁 预览';document.getElementById('modalMeta').innerHTML='';document.getElementById('modal').classList.add('show');return}
-let ok=true,r=c;for(const v of s){const val=prompt(`「${v}」的值：`,'');if(val===null){ok=false;break}r=r.replace(new RegExp(`\\{${v}\\}`,'g'),val)}
-if(ok){document.getElementById('modalContent').value=r;document.getElementById('modalTitle').textContent='👁 预览（已替换）';document.getElementById('modalMeta').innerHTML='';document.getElementById('modal').classList.add('show')}
+if(!s.size){document.getElementById('modalContent').value=c;document.getElementById('modalTitle').textContent='馃憗 棰勮';document.getElementById('modalMeta').innerHTML='';document.getElementById('modal').classList.add('show');return}
+let ok=true,r=c;for(const v of s){const val=prompt(`銆?{v}銆嶇殑鍊硷細`,'');if(val===null){ok=false;break}r=r.replace(new RegExp(`\\{${v}\\}`,'g'),val)}
+if(ok){document.getElementById('modalContent').value=r;document.getElementById('modalTitle').textContent='馃憗 棰勮锛堝凡鏇挎崲锛?;document.getElementById('modalMeta').innerHTML='';document.getElementById('modal').classList.add('show')}
 }
-function clearEditor(){if(!confirm('清空编辑器？'))return;document.getElementById('pt').value='';document.getElementById('pc').value='';ets=[];renderTags();updVar()}
+
+function clearEditor(){if(!confirm('娓呯┖缂栬緫鍣紵'))return;document.getElementById('pt').value='';document.getElementById('pc').value='';ets=[];renderTags();updVar()}
+
 function toast(msg,t){const c=document.getElementById('toasts');const e=document.createElement('div');e.className='toast';e.textContent=msg;c.appendChild(e);setTimeout(()=>e.remove(),2500)}
-function exportData(){const blob=new Blob([JSON.stringify({prompts:P,categories:C},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`promptlab_${new Date().toISOString().slice(0,10)}.json`;a.click();toast('已导出')}
-function importData(){const inp=document.createElement('input');inp.type='file';inp.accept='.json';inp.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.prompts){if(!confirm(`导入 ${d.prompts.length} 个，覆盖当前？\n（取消则合并）`)){const es=new Set(P.map(p=>p.id));P=[...P,...d.prompts.filter(p=>!es.has(p.id))];C=[...new Set([...C,...(d.categories||[])])]}else{P=d.prompts;C=d.categories||['通用']}S();renderCat();render();updCnt();toast(`已导入，共 ${P.length} 个`)}}catch(e){toast('导入失败','err')}};r.readAsText(f)};inp.click()}
+
+function exportData(){const blob=new Blob([JSON.stringify({prompts:P,categories:C},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`promptlab_${new Date().toISOString().slice(0,10)}.json`;a.click();toast('宸插鍑?)}
+function importData(){const inp=document.createElement('input');inp.type='file';inp.accept='.json';inp.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.prompts){if(!confirm(`瀵煎叆 ${d.prompts.length} 涓紝瑕嗙洊褰撳墠锛焅n锛堝彇娑堝垯鍚堝苟锛塦)){const es=new Set(P.map(p=>p.id));P=[...P,...d.prompts.filter(p=>!es.has(p.id))];C=[...new Set([...C,...(d.categories||[])])]}else{P=d.prompts;C=d.categories||['閫氱敤']}S();renderCat();render();updCnt();toast(`宸插鍏ワ紝鍏?${P.length} 涓猔)}}catch(e){toast('瀵煎叆澶辫触','err')}};r.readAsText(f)};inp.click()}
+
 document.addEventListener('keydown',e=>{
 if(e.key==='Escape'){if(document.getElementById('modal').classList.contains('show'))closeModal();else if(document.getElementById('editor').style.display==='block')closeEditor()}
 if((e.ctrlKey||e.metaKey)&&e.key==='s'&&document.getElementById('editor').style.display==='block'){e.preventDefault();save()}
 });
+
 L();renderCat();render();updCnt();
 document.getElementById('pc').addEventListener('input',updVar);
 </script>
